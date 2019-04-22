@@ -1,0 +1,60 @@
+{
+  "name": "keyboard-vis",
+  "version": "0.0.1",
+  "description": "Keyboard layout visualization",
+  "keywords": [
+    "keyboard shortcuts"
+  ],
+  "homepage": "https://github.com/Dmitra/keyboard#readme",
+  "license": "GPL-3.0+",
+  "author": {
+    "name": "Adrian Dmitra",
+    "email": "adrian@dmitra.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dmitra/keyboard"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --watch --config webpack.config.js"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              "last 2 versions"
+            ]
+          }
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    },
+    "extends": "@graphiy/eslint-config",
+    "globals": {
+      "_": true,
+      "$": true
+    }
+  },
+  "dependencies": {
+    "jquery": "^3.4.0",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@graphiy/eslint-config": "^0.1.0",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1",
+    "css-loader": "^2.1.1",
+    "style-loader": "^0.23.1",
+    "webpack-dev-server": "^3.3.1"
+  }
+}

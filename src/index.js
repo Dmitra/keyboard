@@ -1,13 +1,20 @@
-import physical from '../data/physical.json'
-import applications from '../data/applications.json'
-import aliases from '../data/aliases.json'
-import codes from '../data/codes.json'
 import './index.css'
+import { PHYSICAL, APPLICATIONS, MODIFIERS,
+  findKey,
+  findKeys,
+  findKeysByCode,
+  findKeysOfModifiers,
+} from './data'
 
 class App {
   constructor () {
     this.container = $('.container')
-    this.keyboard = physical['Lenovo Y70-70 Touch']
+    this.state = {
+      keyboard: PHYSICAL[0],
+      app: '',
+      modifiers: [],
+      keys: [],
+    }
 
     document.addEventListener('keydown', this._onKeyDown.bind(this))
     document.addEventListener('keyup', this._onKeyUp.bind(this))
@@ -19,9 +26,9 @@ class App {
   }
 
   render () {
-    _.each(this.keyboard.keys, (key, i) => {
-      const label = this.keyboard.labels[key] || key
-      const c = this.keyboard.coordinates[i]
+    _.each(this.state.keyboard.keys, (key, i) => {
+      const label = this.state.keyboard.labels[key] || key
+      const c = this.state.keyboard.coordinates[i]
       const btn = $(`<div
         class="button"
         data-id="${key}"
@@ -34,6 +41,7 @@ class App {
       >${label}</div>`)
       this.container.append(btn)
     })
+    this.buttons = $('.button')
   }
 
   toggleHover (key) {
@@ -48,65 +56,61 @@ class App {
   }
 
   findButton (key) {
-    const button = _.find($('.button'), button => {
+    const button = _.find(this.buttons, button => {
       return button.dataset.id === key
     })
     if (button) return $(button)
   }
 
-  findKeys (text) {
-    const keys = []
-    _.each(aliases, (alias, key) => {
-      if (alias.includes(text)) keys.push(key)
+  updateKeys () {
+    const modifiedKeys = findKeysOfModifiers(this.state.keyboard, this.state.modifiers)
+    _.each(this.state.keyboard.keys, key => {
+      const value = modifiedKeys[key] || key
+      const label = this.state.keyboard.labels[value] || value
+      this.findButton(key).text(label)
     })
-    if (_.isEmpty(keys) && this.keyboard.keys.includes(text)) return text
-    return keys
-  }
-
-  findKeysByCode (text) {
-    const keys = []
-    _.each(codes, (code, key) => {
-      if (code.includes(text)) keys.push(key)
-    })
-    return keys
   }
 
   _onKeyDown (e) {
-    // temporary enable F12
-    if (e.code !== 'F12') {
-      e.preventDefault()
-    }
+    e.preventDefault()
     e.stopPropagation()
-    const keys = this.findKeysByCode(e.code)
-    this.togglePressed(keys)
-    console.log(e.code)
+    const key = findKeysByCode(e.code)[0]
+    this.togglePressed(key)
+    if (MODIFIERS.includes(key)) {
+      this.state.modifiers.push(key)
+      this.updateKeys()
+    }
   }
 
   _onKeyUp (e) {
     e.preventDefault()
     e.stopPropagation()
-    const keys = this.findKeysByCode(e.code)
-    this.togglePressed(keys)
+    const key = findKeysByCode(e.code)[0]
+    this.togglePressed(key)
+    if (MODIFIERS.includes(key)) {
+      this.state.modifiers = _.without(this.state.modifiers, key)
+      this.updateKeys()
+    }
   }
 
   _onMouseover (e) {
     const key = e.target.dataset.id
-    this.toggleHover(this.findKeys(key))
+    this.toggleHover(findKey(this.state.keyboard, key))
   }
 
   _onMouseout (e) {
     const key = e.target.dataset.id
-    this.toggleHover(this.findKeys(key))
+    this.toggleHover(findKey(this.state.keyboard, key))
   }
 
   _onMousedown (e) {
     const key = e.target.dataset.id
-    this.togglePressed(this.findKeys(key))
+    this.togglePressed(findKey(this.state.keyboard, key))
   }
 
   _onMouseup (e) {
     const key = e.target.dataset.id
-    this.togglePressed(this.findKeys(key))
+    this.togglePressed(findKey(this.state.keyboard, key))
   }
 }
 const app = new App()

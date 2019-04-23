@@ -14,6 +14,7 @@ class App {
       app: '',
       modifiers: [],
       keys: [],
+      sticky: [],
     }
 
     document.addEventListener('keydown', this._onKeyDown.bind(this))
@@ -48,10 +49,10 @@ class App {
     this.findButton(key).toggleClass('hovered')
   }
 
-  togglePressed (keyS) {
+  togglePressed (keyS, state) {
     const keys = _.castArray(keyS)
     _.each(keys, key => {
-        this.findButton(key).toggleClass('pressed')
+        this.findButton(key).toggleClass('pressed', state)
     })
   }
 
@@ -71,46 +72,48 @@ class App {
     })
   }
 
+  toggleKey (key, state) {
+    this.togglePressed(key, state)
+    if (MODIFIERS.includes(key)) {
+      if (state) this.state.modifiers.push(key)
+      else this.state.modifiers = _.without(this.state.modifiers, key)
+      this.updateKeys()
+    }
+  }
+
   _onKeyDown (e) {
     e.preventDefault()
     e.stopPropagation()
     const key = findKeysByCode(e.code)[0]
-    this.togglePressed(key)
-    if (MODIFIERS.includes(key)) {
-      this.state.modifiers.push(key)
-      this.updateKeys()
-    }
+    this.toggleKey(key, true)
   }
 
   _onKeyUp (e) {
     e.preventDefault()
     e.stopPropagation()
     const key = findKeysByCode(e.code)[0]
-    this.togglePressed(key)
-    if (MODIFIERS.includes(key)) {
-      this.state.modifiers = _.without(this.state.modifiers, key)
-      this.updateKeys()
-    }
+    this.toggleKey(key, false)
   }
 
   _onMouseover (e) {
     const key = e.target.dataset.id
-    this.toggleHover(findKey(this.state.keyboard, key))
+    this.toggleKey(key, true)
   }
 
   _onMouseout (e) {
     const key = e.target.dataset.id
-    this.toggleHover(findKey(this.state.keyboard, key))
+    if (!this.state.sticky.includes(key)) this.toggleKey(key, false)
   }
 
   _onMousedown (e) {
     const key = e.target.dataset.id
-    this.togglePressed(findKey(this.state.keyboard, key))
+    const sticky = this.state.sticky
+    if (sticky.includes(key)) this.state.sticky = _.without(sticky, key)
+    else sticky.push(key)
+    this.toggleKey(key, true)
   }
 
   _onMouseup (e) {
-    const key = e.target.dataset.id
-    this.togglePressed(findKey(this.state.keyboard, key))
   }
 }
 const app = new App()

@@ -12,6 +12,7 @@ class App {
     document.addEventListener('keydown', this._onKeyDown.bind(this))
     document.addEventListener('keyup', this._onKeyUp.bind(this))
     this.container.on('mouseover', '.button', this._onMouseover.bind(this))
+    this.container.on('mouseout', '.button', this._onMouseout.bind(this))
     this.container.on('mousedown', '.button', this._onMousedown.bind(this))
     this.container.on('mouseup', '.button', this._onMouseup.bind(this))
     this.render()
@@ -58,6 +59,7 @@ class App {
     _.each(aliases, (alias, key) => {
       if (alias.includes(text)) keys.push(key)
     })
+    if (_.isEmpty(keys) && this.keyboard.keys.includes(text)) return text
     return keys
   }
 
@@ -67,9 +69,6 @@ class App {
       if (code.includes(text)) keys.push(key)
     })
     return keys
-  }
-
-  findKeyByLocation (x, y) {
   }
 
   _onKeyDown (e) {
@@ -91,15 +90,23 @@ class App {
   }
 
   _onMouseover (e) {
-    this.toggleHover(this.findKeyByLocation(e.key))
+    const key = e.target.dataset.id
+    this.toggleHover(this.findKeys(key))
+  }
+
+  _onMouseout (e) {
+    const key = e.target.dataset.id
+    this.toggleHover(this.findKeys(key))
   }
 
   _onMousedown (e) {
-    this.togglePressed(this.findKeyByLocation(e.key))
+    const key = e.target.dataset.id
+    this.togglePressed(this.findKeys(key))
   }
 
   _onMouseup (e) {
-    this.togglePressed(this.findKeyByLocation(e.key))
+    const key = e.target.dataset.id
+    this.togglePressed(this.findKeys(key))
   }
 }
 const app = new App()

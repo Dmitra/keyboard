@@ -1,0 +1,41 @@
+{
+  "VIM Insert mode": {
+    "no": [
+    ],
+    "Fn": [
+    ],
+    "Shift": [
+    ]
+  },
+  "Telegram": {
+    "no": {
+      "Enter": "Send message"
+    },
+    "Ctrl": {
+      "q": "Quit",
+      "o": "Choose file",
+      "f": "Start search",
+      "k": "Create link",
+      "m": "Minimize",
+      "w": "Minimize",
+      "a": "Select all",
+      "c": "Copy",
+      "v": "Paste",
+      "d": "Delete word forward",
+      "x": "Cut",
+      "z": "Undo",
+      "e": "End",
+      "b": "Make bold",
+      "i": "Make italic",
+      "Tab": "Move to next chat",
+      "Backspace": "Delete word",
+      "Delete": "Delete word forward",
+      "Enter": "New line"
+    },
+    "Ctrl+Shift": {
+      "Tab": "Move to previous chat",
+      "z": "Redo",
+      "i": "Insert Tab"
+    }
+  }
+}

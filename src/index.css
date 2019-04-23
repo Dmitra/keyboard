@@ -1,0 +1,22 @@
+.container {
+  position: absolute;
+  transform: scale(3.2);
+}
+
+.button {
+  font-size: 5px;
+  position: absolute;
+  border: 1px grey solid;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button.hovered {
+  background: lightgrey;
+}
+
+.button.pressed {
+  background: grey;
+}

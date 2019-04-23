@@ -1,12 +1,11 @@
 .container {
   position: absolute;
-  transform: scale(3.2);
 }
 
 .button {
-  font-size: 5px;
+  font-size: 1.8vw;
   position: absolute;
-  border: 1px grey solid;
+  border: 0.2vw grey solid;
   text-align: center;
   display: flex;
   align-items: center;

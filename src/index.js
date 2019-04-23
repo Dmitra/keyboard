@@ -27,17 +27,21 @@ class App {
   }
 
   render () {
+    const totalWidth = _(this.state.keyboard.coordinates).map(c => c[0] + c[2]).max()
+    const coordinates = _.map(this.state.keyboard.coordinates, c => {
+      return [c[0] / totalWidth * 100, c[1] / totalWidth * 100, c[2] / totalWidth * 100, c[3] / totalWidth * 100]
+    })
     _.each(this.state.keyboard.keys, (key, i) => {
       const label = this.state.keyboard.labels[key] || key
-      const c = this.state.keyboard.coordinates[i]
+      const c = coordinates[i]
       const btn = $(`<div
         class="button"
         data-id="${key}"
         style="
-          left: ${c[0]}px;
-          top: ${c[1]}px;
-          width: ${c[2]}px;
-          height: ${c[3]}px;
+          left: ${c[0]}vw;
+          top: ${c[1]}vw;
+          width: ${c[2]}vw;
+          height: ${c[3]}vw;
         "
       >${label}</div>`)
       this.container.append(btn)

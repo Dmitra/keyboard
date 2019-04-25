@@ -1,0 +1,70 @@
+---
+Shift Left:
+- Shift
+- Shift_L
+Shift Right:
+- Shift
+- Shift_R
+Control Left:
+- Ctrl
+- Control
+- Control_L
+Control Right:
+- Ctrl
+- Control
+- Control_R
+Alt Left:
+- Alt
+- Alt_L
+Alt Right:
+- Alt
+- Alt_R
+- AltGr
+- Alt Graph
+Meta Left:
+- Super
+- Super_L
+- Win
+- Meta
+- Meta_L
+- Mod4
+Meta Right:
+- Super
+- Super_R
+- Win
+- Meta
+- Meta_R
+Menu: []
+Arrow Left:
+- Left
+Arrow Right:
+- Right
+Arrow Up:
+- Up
+Arrow Down:
+- Down
+Space:
+- whitespace
+- " "
+".":
+- dot
+Num Lock:
+- Mod2
+Escape:
+- Esc
+Enter:
+- Return
+Print Screen:
+- PrtSc
+System Request:
+- Sys Rq
+Scroll Lock:
+- ScrLk
+Page Up:
+- PgUp
+Page Down:
+- PgDn
+Caps Lock:
+- CapsLk
+Fn:
+- Function

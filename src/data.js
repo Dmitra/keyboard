@@ -1,15 +1,37 @@
-import PHYSICAL from '../data/physical.json'
-import APPLICATIONS from '../data/applications.json'
-import ALIASES from '../data/aliases.json'
+import yaml from 'js-yaml'
+import ALIASES from '../data/aliases.yml'
 import BROWSER_CODES from '../data/codes.json'
-import MODIFIERS from '../data/modifiers.json'
+import MODIFIERS from '../data/modifiers.yml'
 
 _.each(ALIASES, (aliases, key) => {
   aliases.push(key.replace(' ', ''))
   return aliases
 })
 
-export { PHYSICAL, APPLICATIONS, ALIASES, BROWSER_CODES, MODIFIERS }
+const Layout = {
+  getList: type => {
+    return new Promise((resolve, reject) => {
+      $.get(`/data/${type}/index.yml`, data => {
+        resolve(yaml.load(data))
+      })
+    })
+  },
+  get: (type, name) => {
+    return Layout[type](name)
+  },
+  physical: name => {
+    return new Promise((resolve, reject) => {
+      $.getJSON(`/data/physical/${name}.json`, data => resolve(data))
+    })
+  },
+  app: name => {
+    return new Promise((resolve, reject) => {
+      $.getJSON(`/data/app/${name}.yaml`, data => resolve(data))
+    })
+  }
+}
+
+export { Layout, ALIASES, BROWSER_CODES, MODIFIERS }
 
 export function findKeys (keyboard, text) {
   const keys = []

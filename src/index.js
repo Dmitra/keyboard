@@ -1,5 +1,7 @@
 import './index.css'
-import { PHYSICAL, APPLICATIONS, MODIFIERS,
+import { 
+  Layout,
+  MODIFIERS,
   findKey,
   findKeys,
   findKeysByCode,
@@ -9,8 +11,12 @@ import { PHYSICAL, APPLICATIONS, MODIFIERS,
 class App {
   constructor () {
     this.container = $('.container')
+    this.layouts = {
+      physical: [],
+      app: [],
+    }
     this.state = {
-      keyboard: PHYSICAL[0],
+      keyboard: '',
       app: '',
       modifiers: [],
       keys: [],
@@ -23,6 +29,13 @@ class App {
     this.container.on('mouseout', '.button', this._onMouseout.bind(this))
     this.container.on('mousedown', '.button', this._onMousedown.bind(this))
     this.container.on('mouseup', '.button', this._onMouseup.bind(this))
+    this.initLayout()
+  }
+
+  async initLayout () {
+    this.layouts.physical = await Layout.getList('physical')
+    this.layouts.app = await Layout.getList('app')
+    this.state.keyboard = await Layout.get('physical', this.layouts.physical[0])
     this.render()
   }
 

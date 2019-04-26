@@ -6,7 +6,7 @@
     "keyboard shortcuts"
   ],
   "homepage": "https://github.com/Dmitra/keyboard#readme",
-  "license": "GPL-3.0+",
+  "license": "agpl-3.0",
   "author": {
     "name": "Adrian Dmitra",
     "email": "adrian@dmitra.com"
@@ -43,6 +43,9 @@
     }
   },
   "dependencies": {
+    "@material/auto-init": "^1.0.0",
+    "@material/list": "^1.1.1",
+    "@material/select": "^1.1.1",
     "@mdi/font": "^3.6.95",
     "jquery": "^3.4.0",
     "js-yaml": "^3.13.1",
@@ -55,6 +58,8 @@
     "@graphiy/eslint-config": "^0.1.0",
     "css-loader": "^2.1.1",
     "js-yaml-loader": "^1.0.1",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",

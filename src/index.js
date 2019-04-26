@@ -1,11 +1,14 @@
-import './index.css'
+import mdcAutoInit from '@material/auto-init'
+import { MDCSelect } from '@material/select'
+
+import './index.scss'
 import { 
   Layout,
   MODIFIERS,
   findKey,
   findKeys,
   findKeysByCode,
-  findKeysOfModifiers,
+  getKeys,
 } from './data'
 
 class App {
@@ -23,23 +26,37 @@ class App {
       sticky: [],
     }
 
+    this.controls = {
+      layoutSelector: $('#physical-layout'),
+      appSelector: $('#app-layout'),
+    }
+    this._bindHandlers()
+    this.initLayout()
+  }
+
+  _bindHandlers () {
     document.addEventListener('keydown', this._onKeyDown.bind(this))
     document.addEventListener('keyup', this._onKeyUp.bind(this))
     this.container.on('mouseover', '.button', this._onMouseover.bind(this))
     this.container.on('mouseout', '.button', this._onMouseout.bind(this))
     this.container.on('mousedown', '.button', this._onMousedown.bind(this))
     this.container.on('mouseup', '.button', this._onMouseup.bind(this))
-    this.initLayout()
+ 
+    mdcAutoInit.register('MDCSelect', MDCSelect)
+    mdcAutoInit()
+    this.controls.layoutSelector[0].MDCSelect.listen('MDCSelect:change', this._onLayoutChange.bind(this))
+    this.controls.appSelector[0].MDCSelect.listen('MDCSelect:change', this._onAppChange.bind(this))
   }
 
   async initLayout () {
     this.layouts.physical = await Layout.getList('physical')
     this.layouts.app = await Layout.getList('app')
-    this.state.keyboard = await Layout.get('physical', this.layouts.physical[0])
     this.render()
+    this.controls.layoutSelector[0].MDCSelect.selectedIndex = 1
   }
 
   render () {
+    this._renderControls()
     const totalWidth = _(this.state.keyboard.coordinates).map(c => c[0] + c[2]).max()
     const coordinates = _.map(this.state.keyboard.coordinates, c => {
       return [c[0] / totalWidth * 100, c[1] / totalWidth * 100, c[2] / totalWidth * 100, c[3] / totalWidth * 100]
@@ -81,7 +98,8 @@ class App {
   }
 
   updateKeys () {
-    const modifiedKeys = findKeysOfModifiers(this.state.keyboard, this.state.modifiers)
+    const { keyboard, modifiers, app, context } = this.state
+    const modifiedKeys = getKeys(keyboard, modifiers, app, context)
     _.each(this.state.keyboard.keys, key => {
       const value = modifiedKeys[key] || key
       const label = this.state.keyboard.labels[value] || value
@@ -97,6 +115,24 @@ class App {
       this.updateKeys()
     }
   }
+
+  // Private methods
+
+  _renderControls () {
+    if (this.controls.layoutSelector.find('option').length <= 1) {
+      _.each(this.layouts.physical, layout => {
+        this.controls.layoutSelector.find('select').append($("<option>").text(layout))
+      })
+    }
+
+    if (this.controls.appSelector.find('option').length <= 1) {
+      _.each(this.layouts.app, layout => {
+        this.controls.appSelector.find('select').append($("<option>").text(layout))
+      })
+    }
+  }
+
+  // Event Handlers
 
   _onKeyDown (e) {
     e.preventDefault()
@@ -131,6 +167,18 @@ class App {
   }
 
   _onMouseup (e) {
+  }
+
+  async _onLayoutChange (e) {
+    const i = e.target.MDCSelect.selectedIndex
+    this.state.keyboard = await Layout.get('physical', this.layouts.physical[i-1])
+    this.render()
+  }
+
+  async _onAppChange (e) {
+    const i = e.target.MDCSelect.selectedIndex
+    this.state.app = await Layout.get('app', this.layouts.app[i-1])
+    this.updateKeys()
   }
 }
 const app = new App()

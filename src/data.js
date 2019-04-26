@@ -26,7 +26,9 @@ const Layout = {
   },
   app: name => {
     return new Promise((resolve, reject) => {
-      $.getJSON(`/data/app/${name}.yaml`, data => resolve(data))
+      $.get(`/data/app/${name}.yml`, data => {
+        resolve(yaml.load(data))
+      })
     })
   }
 }
@@ -53,14 +55,25 @@ export function findKeysByCode (text) {
   })
   return keys
 }
-
-export function findKeysOfModifiers (keyboard, keys) {
-  if (_.isEmpty(keys)) return []
+/**
+ * @param keyboard layout
+ * @param Array of modifier keys
+ * @param Object app keyboard layout
+ * @param String app context
+ * @return Object of key values by physical key
+ *   modifiers = ['Shift'}
+ *   return {
+ *     "a": "A"
+ *   }
+ */
+export function getKeys (keyboard, modifiers, app, context) {
+  if (_.isEmpty(modifiers)) return []
   // TODO combine modifiers
-  const key = keys[0]
-  const aliases = ALIASES[key]
-  aliases.unshift(key)
-  return _.reduce(aliases, (result, alias, k) => {
+  const modifier = modifiers[0]
+  const modifierAliases = ALIASES[modifier]
+  modifierAliases.unshift(modifier)
+
+  return _.reduce(modifierAliases, (result, alias, k) => {
     let keysWithModifier = {}
     const keys = keyboard[alias]
     if (_.isArray(keys)) {

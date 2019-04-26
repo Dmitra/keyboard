@@ -1,0 +1,117 @@
+---
+OS:
+  Ctrl:
+    q:
+      action: quit
+      element: window
+    m:
+      action: minimize
+      element: window
+    w:
+      action: minimize
+      element: window
+window:
+  'no':
+    Escape:
+      action: close
+      element: chat
+  Ctrl:
+    Tab:
+      action: navigate
+      element: chat
+      direction: next
+    Page Down:
+      action: navigate
+      element: chat
+      direction: next
+    Page Up:
+      action: navigate
+      element: chat
+      direction: previous
+  Alt:
+    Arrow Down:
+      action: navigate
+      element: chat
+      direction: next
+    Arrow Up:
+      action: navigate
+      element: chat
+      direction: previous
+  Ctrl+Shift:
+    Tab:
+      action: navigate
+      element: chat
+      direction: previous
+chat:
+  'no':
+    Enter:
+      action: send
+      element: message
+  Ctrl:
+    o:
+      action: open
+      element: file selector
+    f:
+      action: focus
+      element: search bar
+    k:
+      action: create
+      element: link
+message:
+  Ctrl:
+    a:
+      action: select
+      element: text
+      amount: all
+    c:
+      action: copy
+      element: text
+      amount: selected
+    v:
+      action: paste
+      element: text
+      amount: all
+    x:
+      action: cut
+      element: text
+      amount: selected
+    z:
+      action: undo
+      element: ''
+    d:
+      action: delete
+      element: word
+      direction: forward
+    e:
+      action: move cursor
+      element: character
+      amount: all
+      direction: forward
+    b:
+      action: make
+      attr: bold
+      element: text
+      amount: selected
+    i:
+      action: make
+      attr: italic
+      element: text
+      amount: selected
+    Backspace:
+      action: delete
+      element: word
+      direction: backward
+    Delete:
+      action: delete
+      element: word
+      direction: forward
+    Enter:
+      action: new
+      element: line
+      direction: below
+  Ctrl+Shift:
+    z:
+      action: redo
+    i:
+      action: insert
+      element: tab character

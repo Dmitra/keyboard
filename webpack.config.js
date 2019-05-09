@@ -1,26 +1,30 @@
 const path = require('path')
+const HtmlWebPackPlugin = require("html-webpack-plugin")
 
 module.exports = {
-  devtool: 'source-map',
+  entry: './src/index.js',
   module: {
     rules: [{
-      test: /\.(scss|css)$/,
-      use: [
-      'style-loader',
-      'css-loader',
-      {
-        loader: 'sass-loader',
-        options: {
-          sourceMap: true,
-          includePaths: [
-            'node_modules',
-            'node_modules/@material/*'
-          ].map(d => path.join(__dirname, d))
-        }
-      }]
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      use: {
+        loader: "babel-loader",
+      }
     }, {
       test: /\.yml$/,
       use: 'js-yaml-loader',
+    }, {
+      test: /\.html$/,
+        use: [{
+          loader: "html-loader",
+        }]
     }], 
-  }
+  },
+  devtool: 'source-map',
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html",
+    })
+  ]
 }

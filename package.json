@@ -6,22 +6,27 @@
     "keyboard shortcuts"
   ],
   "homepage": "https://github.com/Dmitra/keyboard#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dmitra/keyboard"
+  },
   "license": "agpl-3.0",
   "author": {
     "name": "Adrian Dmitra",
     "email": "adrian@dmitra.com"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Dmitra/keyboard"
-  },
   "scripts": {
-    "start": "webpack-dev-server --watch --config webpack.config.js"
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --hot --inline --mode development"
   },
   "babel": {
+    "plugins": [
+      "react-hot-loader/babel",
+      "@babel/plugin-transform-runtime"
+    ],
     "presets": [
       [
-        "env",
+        "@babel/preset-env",
         {
           "targets": {
             "browsers": [
@@ -29,7 +34,8 @@
             ]
           }
         }
-      ]
+      ],
+      "@babel/preset-react"
     ]
   },
   "eslintConfig": {
@@ -49,20 +55,29 @@
     "@mdi/font": "^3.6.95",
     "jquery": "^3.4.0",
     "js-yaml": "^3.13.1",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.3",
     "@graphiy/eslint-config": "^0.1.0",
+    "babel-loader": "^8.0.5",
+    "babel-polyfill": "^6.26.0",
     "css-loader": "^2.1.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
     "js-yaml-loader": "^1.0.1",
-    "node-sass": "^4.11.0",
-    "sass-loader": "^7.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.8.4",
     "style-loader": "^0.23.1",
     "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.1",
+    "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.3.1"
   }
 }

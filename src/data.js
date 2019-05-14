@@ -4,8 +4,8 @@ import BROWSER_CODES from '../data/codes.json'
 import MODIFIERS from '../data/modifiers.yml'
 
 _.each(ALIASES, (aliases, key) => {
+  aliases.push(key)
   aliases.push(key.replace(' ', ''))
-  return aliases
 })
 
 const Layout = {
@@ -71,16 +71,26 @@ export function getKeys (keyboard, modifiers, app, context) {
   // TODO combine modifiers
   const modifier = modifiers[0]
   const modifierAliases = ALIASES[modifier]
-  modifierAliases.unshift(modifier)
 
-  return _.reduce(modifierAliases, (result, alias, k) => {
-    let keysWithModifier = {}
-    const keys = keyboard[alias]
+  let keysWithModifier = {}
+  _.reduce(modifierAliases, (result, alias, k) => {
+    let keys = keyboard[alias]
+
+    // Handle case when keyboard keys are defined as Array
     if (_.isArray(keys)) {
       _.each(keyboard.keys, (key, i) => {
         if (keys[i]) keysWithModifier[key] = keys[i]
       })
-    } else if (keys) keysWithModifier = keys
-    return _.isEmpty(keysWithModifier) ? result : _.merge(result, keysWithModifier)
-  }, {})
+      keys = {}
+    }
+    return _.merge(result, keysWithModifier, keys)
+  }, keysWithModifier)
+
+  if (app && app[context]) {
+    _.reduce(modifierAliases, (result, alias, k) => {
+      return _.merge(result, app[context][alias])
+    }, keysWithModifier)
+  }
+
+  return keysWithModifier
 }

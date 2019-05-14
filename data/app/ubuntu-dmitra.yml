@@ -65,11 +65,11 @@ Desktop:
       action: maximize
       element: window
       direction: horizontally
-    <:
+    ',':
       action: Snap to edge
       element: window
       direction: left
-    '>':
+    '.':
       action: Snap to edge
       element: window
       direction: right

@@ -11,6 +11,12 @@ module.exports = {
         loader: "babel-loader",
       }
     }, {
+      test: /\.css$/,
+      use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+    }, {
+      test: /\.(eot|woff|woff2|ttf|svg|png)(\?\S*)?$/,
+      loader: 'url-loader?&name=asset/font/[name].[ext]',
+    }, {
       test: /\.yml$/,
       use: 'js-yaml-loader',
     }, {

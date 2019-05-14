@@ -17,11 +17,10 @@
   },
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --hot --inline --mode development"
+    "start": "webpack-dev-server --inline --mode development"
   },
   "babel": {
     "plugins": [
-      "react-hot-loader/babel",
       "@babel/plugin-transform-runtime"
     ],
     "presets": [
@@ -49,9 +48,7 @@
     }
   },
   "dependencies": {
-    "@material/auto-init": "^1.0.0",
-    "@material/list": "^1.1.1",
-    "@material/select": "^1.1.1",
+    "@material-ui/core": "^3.9.3",
     "@mdi/font": "^3.6.95",
     "jquery": "^3.4.0",
     "js-yaml": "^3.13.1",
@@ -74,8 +71,9 @@
     "js-yaml-loader": "^1.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-hot-loader": "^4.8.4",
+    "react-jss": "^8.6.1",
     "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.3.1"

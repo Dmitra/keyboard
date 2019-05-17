@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
-import Button from './button.jsx'
+import Button from './views/button.jsx'
 
 import { 
   MODIFIERS,

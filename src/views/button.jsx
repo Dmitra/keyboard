@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Paper from '@material-ui/core/Paper'
+import Direction from './direction.jsx'
 
 export default function Button (p) {
   const c = p.coordinates
@@ -58,22 +59,6 @@ const StyledKey = styled.div`
 `
 const Icon = styled.div`
   flex: 0 0 33%;
-`
-const Direction = function (p) {
-  return <StyledDirection>
-    <span className={'mdi mdi-chevron-' + p.value }></span>
-  </StyledDirection>
-
-}
-const StyledDirection = styled.div`
-  flex: 0 0 33%;
-  position: relative;
-  width: 100%;
-  height: 100%;
-
-  .mdi {
-    margin: auto;
-  }
 `
 const Action = styled.div`
   flex: 1;

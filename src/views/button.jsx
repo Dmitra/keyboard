@@ -38,8 +38,8 @@ const StyledButton = styled(Paper)`
   align-items: stretch;
   text-align: center;
   justify-content: flex-end;
-  background: ${p => p.pressed ? 'darkgrey' : 'white'};
   font-size: ${p => 0.5 + 960/window.innerWidth + 'vw'};
+  font-weight: ${p => p.elevation === 1 ? 'bold' : 'normal'};
   color: grey;
 `
 const ButtonHeader = styled.div`

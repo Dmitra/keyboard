@@ -4,8 +4,8 @@ import styled from 'styled-components'
 const aliases = {
   left: ['previous', 'backward', 'backwards'], 
   right: ['next', 'forward', 'forwards'],
-  up: [],
-  down: [],
+  up: ['above'],
+  down: ['below'],
 }
 const invertedIndex = {}
 _.each(aliases, (aliases, name) => _.each(aliases, alias => invertedIndex[alias] = name))

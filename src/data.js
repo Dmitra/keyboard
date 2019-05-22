@@ -31,14 +31,36 @@ const Layout = {
     return new Promise((resolve, reject) => {
       $.get(`/data/app/${name}.yml`, data => {
         const json = yaml.load(data)
-        _.each(json, modDefs => normalizeModDefs(modDefs))
-        resolve(json)
+        // Group actions by context and by modifier
+        const actionsByContext = groupBy(json, 'context')
+        _.each(actionsByContext, (actions, _context) => {
+          const actionsByModifier = groupBy(actions, 'modifier')
+          _.each(actionsByModifier, (actions, modifier) => {
+            actionsByModifier[modifier] = _.keyBy(actions, 'key')
+          })
+          actionsByContext[_context] = actionsByModifier 
+        })
+
+        _.each(actionsByContext, modDefs => normalizeModDefs(modDefs))
+        resolve(actionsByContext)
       })
     })
   }
 }
 
 export { Layout, ALIASES, BROWSER_CODES, MODIFIERS }
+
+function groupBy (collection, attr) {
+  const result = {}
+  _.each(collection, item => {
+    const keys = _.castArray(item[attr])
+    _.each(keys, key => {
+      result[key] = result[key] || []
+      result[key].push(item)
+    })
+  })
+  return result
+}
 
 function normalizeModDefs (modDefs) {
   _.each(modDefs, (keys, modifier) => {
@@ -80,10 +102,8 @@ export function findKeysByCode (text) {
  */
 export function getKeys (keyboard, modifiers, app, context) {
   let keysWithModifier = {}
-  if (_.isEmpty(modifiers) && app && app[context] && app[context].no) {
-    return app[context].no
-  }
-  const modifier = _.sortBy(modifiers).join('+')
+  context = context || 'undefined'
+  let modifier = _.sortBy(modifiers).join('+')
   const keys = getKeysOfModifier(keyboard.modifiers, modifier)
 
   // Handle case when keyboard keys are defined as Array
@@ -91,9 +111,16 @@ export function getKeys (keyboard, modifiers, app, context) {
     _.each(keyboard.keys, (key, i) => {
       if (keys[i]) keysWithModifier[key] = keys[i]
     })
+  } else _.merge(keysWithModifier, keys)
+
+  if (_.isEmpty(modifiers)) modifier = 'undefined'
+
+  // Apply keys for any ("undefined") context
+  if (app && app['undefined']) {
+    _.merge(keysWithModifier, getKeysOfModifier(app['undefined'], modifier))
   }
 
-  if (app && app[context]) {
+  if (app && app[context] && context !== 'undefined') {
     _.merge(keysWithModifier, getKeysOfModifier(app[context], modifier))
   }
 
@@ -106,8 +133,9 @@ function getKeysFromDef(modDef, modPartAliases) {
 }
 
 function getKeysOfModifier (modDef, modifier) {
+  if (!modDef) return
   const modParts = modifier.split('+')
-  const modPartsAliases = _.map(modParts, modPart => ALIASES[modPart])
+  const modPartsAliases = _.map(modParts, modPart => ALIASES[modPart] || [modPart])
   let keys
 
   function iterate (rest, acc) {

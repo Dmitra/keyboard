@@ -1,117 +1,218 @@
 ---
-OS:
-  Ctrl:
-    q:
-      action: quit
-      element: window
-    m:
-      action: minimize
-      element: window
-    w:
-      action: minimize
-      element: window
-window:
-  'no':
-    Escape:
-      action: close
-      element: chat
-  Ctrl:
-    Tab:
-      action: navigate
-      element: chat
-      direction: next
-    Page Down:
-      action: navigate
-      element: chat
-      direction: next
-    Page Up:
-      action: navigate
-      element: chat
-      direction: previous
-  Alt:
-    Arrow Down:
-      action: navigate
-      element: chat
-      direction: next
-    Arrow Up:
-      action: navigate
-      element: chat
-      direction: previous
-  Ctrl+Shift:
-    Tab:
-      action: navigate
-      element: chat
-      direction: previous
-chat:
-  'no':
-    Enter:
-      action: send
-      element: message
-  Ctrl:
-    o:
-      action: open
-      element: file selector
-    f:
-      action: focus
-      element: search bar
-    k:
-      action: create
-      element: link
-message:
-  Ctrl:
-    a:
-      action: select
-      element: text
-      amount: all
-    c:
-      action: copy
-      element: text
-      amount: selected
-    v:
-      action: paste
-      element: text
-      amount: all
-    x:
-      action: cut
-      element: text
-      amount: selected
-    z:
-      action: undo
-      element: ''
-    d:
-      action: delete
-      element: word
-      direction: forward
-    e:
-      action: move cursor
-      element: character
-      amount: all
-      direction: forward
-    b:
-      action: make
-      attr: bold
-      element: text
-      amount: selected
-    i:
-      action: make
-      attr: italic
-      element: text
-      amount: selected
-    Backspace:
-      action: delete
-      element: word
-      direction: backward
-    Delete:
-      action: delete
-      element: word
-      direction: forward
-    Enter:
-      action: new
-      element: line
-      direction: below
-  Ctrl+Shift:
-    z:
-      action: redo
-    i:
-      action: insert
-      element: tab character
+- key: q
+  modifier: Ctrl
+  action: quit
+  element: window
+- key: m
+  modifier: Ctrl
+  action: minimize
+  element: window
+- key: w
+  modifier: Ctrl
+  action: minimize
+  element: window
+- key: Arrow Up
+  context: chats list
+  action: navigate
+  element: chat
+  direction: up
+- key: Arrow Down
+  context: chats list
+  action: navigate
+  element: chat
+  direction: down
+- key: Page Up
+  context: chats list
+  action: navigate
+  element: chat
+  direction: down
+  amount: all visible
+- key: Enter
+  modifier: Ctrl
+  context: chats list
+  action: select
+  element: chat
+- key: 1
+  modifier: Ctrl
+  context:
+    - chats list
+    - message
+  action: open
+  element: 1st pinned chat
+- key: 2
+  modifier: Ctrl
+  context:
+    - chats list
+    - message
+  action: open
+  element: 2nd pinned chat
+- key: 3
+  modifier: Ctrl
+  context:
+    - chats list
+    - message
+  action: open
+  element: 3d pinned chat
+- key: 4
+  modifier: Ctrl
+  context:
+    - chats list
+    - message
+  action: open
+  element: 4th pinned chat
+- key: 5
+  modifier: Ctrl
+  context:
+    - chats list
+    - message
+  action: open
+  element: 5th pinned chat
+- key: Enter
+  context: message
+  action: send
+  element: message
+- key: Escape
+  context: message
+  action: close
+  element: chat
+- key: Tab
+  modifier: Ctrl
+  context: message
+  action: navigate
+  element: chat
+  direction: next
+- key: Page Down
+  modifier: Ctrl
+  context: message
+  action: navigate
+  element: chat
+  direction: next
+- key: Page Up
+  modifier: Ctrl
+  context: message
+  action: navigate
+  element: chat
+  direction: previous
+- key: o
+  modifier: Ctrl
+  context: message
+  action: open
+  element: file selector
+- key: f
+  modifier: Ctrl
+  context: message
+  action: focus
+  element: search bar
+- key: k
+  modifier: Ctrl
+  context: message
+  action: create
+  element: link
+- key: a
+  modifier: Ctrl
+  context: message
+  action: select
+  element: text
+  amount: all
+- key: c
+  modifier: Ctrl
+  context: message
+  action: copy
+  element: text
+  amount: selected
+- key: v
+  modifier: Ctrl
+  context: message
+  action: paste
+  element: text
+  amount: all
+- key: x
+  modifier: Ctrl
+  context: message
+  action: cut
+  element: text
+  amount: selected
+- key: z
+  modifier: Ctrl
+  context: message
+  action: undo
+  element: ''
+- key: d
+  modifier: Ctrl
+  context: message
+  action: delete
+  element: word
+  direction: forward
+- key: e
+  modifier: Ctrl
+  context: message
+  action: move cursor
+  element: character
+  amount: all
+  direction: forward
+- key: b
+  modifier: Ctrl
+  context: message
+  action: make
+  attr: bold
+  element: text
+  amount: selected
+- key: i
+  modifier: Ctrl
+  context: message
+  action: make
+  attr: italic
+  element: text
+  amount: selected
+- key: Backspace
+  modifier: Ctrl
+  context: message
+  action: delete
+  element: word
+  direction: backward
+- key: Delete
+  modifier: Ctrl
+  context: message
+  action: delete
+  element: word
+  direction: forward
+- key: Enter
+  modifier: Ctrl
+  context: message
+  action: new
+  element: line
+  direction: below
+- key: Tab
+  modifier: Ctrl+Shift
+  context: message
+  action: navigate
+  element: chat
+  direction: previous
+- key: z
+  modifier: Ctrl+Shift
+  context: message
+  action: redo
+- key: i
+  modifier: Ctrl+Shift
+  context: message
+  action: insert
+  element: tab character
+- key: Enter
+  modifier: Alt
+  context: message
+  action: scroll
+  element: history
+  direction: bottom
+  amount: all
+- key: Arrow Down
+  modifier: Alt
+  context: message
+  action: navigate
+  element: chat
+  direction: next
+- key: Arrow Up
+  modifier: Alt
+  context: message
+  action: navigate
+  element: chat
+  direction: previous

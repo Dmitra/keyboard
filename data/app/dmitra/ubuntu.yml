@@ -1,0 +1,152 @@
+---
+- key: Tab
+  modifier: Meta
+  action: switch
+  element: window
+- key: Caps Lock
+  modifier: Meta
+  action: close
+  element: window
+- key: h
+  modifier: Meta
+  action: hide
+  element: window
+- key: v
+  modifier: Meta
+  action: open
+  element: File Explorer
+- key: e
+  modifier: Meta
+  action: open
+  element: Trello
+- key: c
+  modifier: Meta
+  action: open
+  element: Notion
+- key: q
+  modifier: Meta
+  action: open
+  element: Skype
+- key: o
+  modifier: Meta
+  action: open
+  element: Tabs Outliner
+- key: g
+  modifier: Meta
+  action: open
+  element: KeeWeb
+- key: z
+  modifier: Meta
+  action: open
+  element: Slack
+- key: w
+  modifier: Meta
+  action: open
+  element: Dictionary
+- key: r
+  modifier: Meta
+  action: open
+  element: Dev Browser & Tools
+- key: b
+  modifier: Meta
+  action: open
+  element: Gitkraken
+- key: s
+  modifier: Meta
+  action: open
+  element: Terminal
+- key: x
+  modifier: Meta
+  action: open
+  element: gnome-calculator
+- key: d
+  modifier: Meta
+  action: open
+  element: VIM
+- key: f
+  modifier: Meta
+  action: open
+  element: Brave Browser
+- key: a
+  modifier: Meta
+  action: open
+  element: Telegram
+- key: Enter
+  modifier: Meta
+  action: maximize
+  element: window
+  direction: horizontally
+- key: ','
+  modifier: Meta
+  action: Snap to edge
+  element: window
+  direction: left
+- key: '.'
+  modifier: Meta
+  action: Snap to edge
+  element: window
+  direction: right
+- key: '-'
+  modifier: Meta
+  action: decrease
+  element: window
+  direction: horizontally
+- key: =
+  modifier: Meta
+  action: increase
+  element: window
+  direction: horizontally
+- key: Space
+  modifier: Meta
+  action: open
+  element: albert
+- key: Enter
+  modifier: Meta+Shift
+  action: maximize
+  element: window
+- key: '-'
+  modifier: Meta+Shift
+  action: decrease
+  element: window
+  direction: vertically
+- key: =
+  modifier: Meta+Shift
+  action: increase
+  element: window
+  direction: vertically
+- key: Space
+  modifier: Alt
+  action: switch
+  element: language
+- key: Space
+  modifier: Ctrl
+  action: open
+  element: ubuntu launcher
+- key: a
+  modifier: Ctrl
+  context: text field
+  action: select
+  element: text
+  amount: all
+- key: c
+  modifier: Ctrl
+  context: text field
+  action: copy
+  element: text
+  amount: selected
+- key: v
+  modifier: Ctrl
+  context: text field
+  action: paste
+  element: text
+  amount: all
+- key: x
+  modifier: Ctrl
+  context: text field
+  action: cut
+  element: text
+  amount: selected
+- key: z
+  modifier: Ctrl
+  context: text field
+  action: undo

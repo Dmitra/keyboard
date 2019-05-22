@@ -26,7 +26,7 @@ export default class App extends Component {
         name: 'ubuntu-dmitra',
         layout: {}
       },
-      context: 'Desktop',
+      context: '',
     }
   }
 
@@ -48,7 +48,7 @@ export default class App extends Component {
     this.setState({ layouts: { physical, app } })
     this.setState({ keyboard })
     // set default app layout
-    if (this.state.app.name && this.state.context) this._onLayoutChange({
+    if (this.state.app.name) this._onLayoutChange({
       target: {
         name: 'app',
         value: this.state.app.name,
@@ -63,7 +63,8 @@ export default class App extends Component {
     })
     appOptions.unshift(<MenuItem key="app-option-empty" value=""><em>None</em></MenuItem>)
     const contextOptions = _.map(_.keys(this.state.app.layout), (context, i) => {
-      return <MenuItem key={'context-option-'+i} value={context}>{context}</MenuItem>
+      const label = context === 'undefined' ? 'any' : context
+      return <MenuItem key={'context-option-'+i} value={context}>{label}</MenuItem>
     })
 
     return (
@@ -112,10 +113,10 @@ export default class App extends Component {
   // Event handlers
 
   async _onLayoutChange (e, context) {
-    context = context || 'OS'
     const type = e.target.name
     const name = e.target.value
     const layout = await Layout.get(type, name)
+    context = _.isString(context) && context ? context : _.findKey(layout)
     this.setState({ [type]: { name, layout }, context })
   }
 

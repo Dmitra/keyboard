@@ -14,14 +14,15 @@ export default function Button (p) {
       onMouseUp={ p.onMouseUp }
       onMouseDown={ p.onMouseDown }
       data-id={ p.id }
+      title={ p.value.description }
     >
       <ButtonHeader>
         <Key>{ p.value.label || p.value.key }</Key>
         <Icon/>
-        <Direction value={ p.value.direction }></Direction>
+        <Direction value={ p.value.direction } amount={ p.value.amount }/>
       </ButtonHeader>
       <Action>{ p.value.action }</Action>
-      <Element>{ p.value.element }</Element>
+      <Element>{ (p.value.scope && p.value.scope + ' > ' + p.value.element) || p.value.element}</Element>
     </StyledButton>
   )
 }

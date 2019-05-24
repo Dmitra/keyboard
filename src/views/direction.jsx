@@ -1,19 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const aliases = {
+const directionAliases = {
   left: ['previous', 'backward', 'backwards'], 
   right: ['next', 'forward', 'forwards'],
   up: ['above'],
   down: ['below'],
 }
-const invertedIndex = {}
-_.each(aliases, (aliases, name) => _.each(aliases, alias => invertedIndex[alias] = name))
+const amountAliases = {
+  '|': ['all', 'end']
+}
+
+const invertedIndexD = {}
+_.each(directionAliases, (aliases, name) => _.each(aliases, alias => invertedIndexD[alias] = name))
+const invertedIndexA = {}
+_.each(amountAliases, (aliases, name) => _.each(aliases, alias => invertedIndexA[alias] = name))
 
 export default function Direction (p) {
-  const value = aliases[p.value] ? p.value : invertedIndex[p.value]
+  const value = directionAliases[p.value] ? p.value : invertedIndexD[p.value]
+  if (p.amount) debugger
+  const amount = amountAliases[p.amount] ? p.amount : invertedIndexA[p.amount]
   return <StyledDirection>
     <span className={'mdi mdi-chevron-' + value }></span>
+    <Amount>{ amount }</Amount>
   </StyledDirection>
 
 }
@@ -22,8 +31,7 @@ const StyledDirection = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-
-  .mdi {
-    margin: auto;
-  }
+  display: flex;
+  align-items: center;
 `
+const Amount = styled.span``

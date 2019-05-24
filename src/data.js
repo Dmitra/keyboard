@@ -109,7 +109,7 @@ export function getKeys (keyboard, modifiers, app, context) {
   // Handle case when keyboard keys are defined as Array
   if (_.isArray(keys)) {
     _.each(keyboard.keys, (key, i) => {
-      if (keys[i]) keysWithModifier[key] = keys[i]
+      if (keys[i]) keysWithModifier[key] = { key, label: keys[i] }
     })
   } else _.merge(keysWithModifier, keys)
 

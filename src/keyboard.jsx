@@ -52,10 +52,10 @@ export default class Keyboard extends Component {
     const modifiedKeys = getKeys(keyboard, modifiers, app, context)
 
     const buttons = _.map(keyboard.keys, (key, i) => {
-      const modifiedKey = modifiedKeys[key] || key
+      let modifiedKey = modifiedKeys[key] ? modifiedKeys[key].key || modifiedKeys[key] : key
       const label = keyboard.labels[key]
-      let value = { key, label, action: modifiedKey === key ? undefined : modifiedKey }
-      if (_.isPlainObject(modifiedKey)) _.merge(value, modifiedKey)
+      let value = { key, label }
+      if (_.isPlainObject(modifiedKeys[key])) _.merge(value, modifiedKeys[key])
       const c = coordinates[i]
       return (
         <Button id={key}

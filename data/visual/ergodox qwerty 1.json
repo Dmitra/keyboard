@@ -1,0 +1,54 @@
+{
+  "keys": [
+    "Escape", "1", "2", "3", "4", "5", "-",
+    "Tab", "q", "w", "e", "r", "t", "Page Up",
+    "Layer2", "a", "s", "d", "f", "g",
+    "Shift Left", "z", "x", "c", "v", "b", "Page Down",
+    "Control Left", "Alt Left", "Meta Left", ":", "~",
+    "Menu", "Insert", "Arrow Left",
+    "Space", "Enter", "Arrow Right",
+    "=", "6", "7", "8", "9", "0", "Backspace",
+    "Home", "y", "u", "i", "o", "p", "Delete",
+    "h", "j", "k", "l", "'", "Layer2",
+    "End", "n", "m", ",", ".", "/", "Shift Right",
+    "[", "]", "\\", "Alt Right", "Control Right",
+    "Print Screen", "Scroll Lock", "Arrow Up", "Arrow Down", "Enter", "Space"
+  ],
+  "labels": {
+    "Escape": "Esc",
+    "Print Screen": "PrtSc",
+    "System Request": "Sys Rq",
+    "Scroll Lock": "ScrLk",
+    "Page Up": "PgUp",
+    "Page Down": "PgDn",
+    "Caps Lock": "CapsLk",
+    "Meta Left": "Win",
+    "Menu": "Menu",
+    "Arrow Up": "↑",
+    "Arrow Down": "↓",
+    "Arrow Left": "←",
+    "Arrow Right": "→",
+    "Shift Left": "Shift",
+    "Shift Right": "Shift",
+    "Control Left": "Ctrl",
+    "Control Right": "Ctrl",
+    "Alt Left": "Alt",
+    "Alt Right": "Alt"
+  },
+  "modifiers": {
+    "Shift": [
+      "", "!", "@", "#", "$", "%", "-",
+      "", "Q", "W", "E", "R", "T", "",
+      "", "A", "S", "D", "F", "G",
+      "", "Z", "X", "C", "V", "B", "",
+      "", "", "", ":", "~",
+      "", "", "",
+      "", "", "",
+      "+", "^", "&", "*", "(", ")", "",
+      "", "Y", "U", "I", "O", "P", "",
+      "H", "J", "K", "L", "\"", "",
+      "", "N", "M", "<", ">", "?", "",
+      "{", "}", "|"
+    ]
+  }
+}

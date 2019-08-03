@@ -3,34 +3,48 @@
   modifier: Meta
   action: switch
   element: window
+  direction: forward
+- key: '`'
+  modifier: Meta
+  action: switch
+  element: window
+  direction: backward
 - key: Caps Lock
   modifier: Meta
   action: close
   element: window
-- key: h
-  modifier: Meta
-  action: hide
-  element: window
-- key: v
-  modifier: Meta
-  action: open
-  element: File Explorer
-- key: e
-  modifier: Meta
-  action: open
-  element: Trello
-- key: c
-  modifier: Meta
-  action: open
-  element: Notion
 - key: q
   modifier: Meta
   action: open
   element: Skype
-- key: o
+- key: d
   modifier: Meta
   action: open
-  element: Tabs Outliner
+  element: Dictionary
+- key: r
+  modifier: Meta
+  action: open
+  element: Notion
+- key: w
+  modifier: Meta
+  action: open
+  element: Dev Browser & Tools
+- key: a
+  modifier: Meta
+  action: open
+  element: Telegram
+- key: s
+  modifier: Meta
+  action: open
+  element: Terminal
+- key: h
+  modifier: Meta
+  action: open
+  element: VIM
+- key: t
+  modifier: Meta
+  action: open
+  element: Brave Browser
 - key: g
   modifier: Meta
   action: open
@@ -39,38 +53,26 @@
   modifier: Meta
   action: open
   element: Slack
-- key: w
-  modifier: Meta
-  action: open
-  element: Dictionary
-- key: r
-  modifier: Meta
-  action: open
-  element: Dev Browser & Tools
-- key: b
-  modifier: Meta
-  action: open
-  element: Gitkraken
-- key: s
-  modifier: Meta
-  action: open
-  element: Terminal
 - key: x
   modifier: Meta
   action: open
   element: gnome-calculator
-- key: d
+- key: m
   modifier: Meta
   action: open
-  element: VIM
-- key: f
+  element: Mail
+- key: c
   modifier: Meta
   action: open
-  element: Brave Browser
-- key: a
+  element: File browser
+- key: v
   modifier: Meta
   action: open
-  element: Telegram
+  element: Gitkraken
+- key: t
+  modifier: Meta+Shift
+  action: open
+  element: Tabs Outliner
 - key: Enter
   modifier: Meta
   action: maximize
@@ -102,7 +104,7 @@
   element: albert
 - key: Enter
   modifier: Meta+Shift
-  action: maximize
+  action: fullscreen / normal
   element: window
 - key: '-'
   modifier: Meta+Shift
@@ -128,6 +130,16 @@
   action: select
   element: text
   amount: all
+- key: z
+  modifier: Ctrl
+  context: text field
+  action: undo
+- key: x
+  modifier: Ctrl
+  context: text field
+  action: cut
+  element: text
+  amount: selected
 - key: c
   modifier: Ctrl
   context: text field
@@ -140,13 +152,31 @@
   action: paste
   element: text
   amount: all
+- key: a
+  modifier: Alt
+  context: text field
+  action: select
+  element: text
+  amount: all
+- key: z
+  modifier: Alt
+  context: text field
+  action: undo
 - key: x
-  modifier: Ctrl
+  modifier: Alt
   context: text field
   action: cut
   element: text
   amount: selected
-- key: z
-  modifier: Ctrl
+- key: c
+  modifier: Alt
   context: text field
-  action: undo
+  action: copy
+  element: text
+  amount: selected
+- key: v
+  modifier: Alt
+  context: text field
+  action: paste
+  element: text
+  amount: all

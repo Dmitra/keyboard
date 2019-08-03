@@ -1,0 +1,74 @@
+{
+  "keys": [
+    "Escape", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Print Screen", "Insert", "Delete",
+    "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
+    "Tab", "q", "d", "r", "w", "b", "j", "f", "u", "p", ";", "[", "]", "\\",
+    "Caps Lock", "a", "s", "h", "t", "g", "y", "n", "e", "o", "i", "'", "Enter",
+    "Shift Left", "z", "x", "m", "c", "v", "k", "l", ",", ".", "/", "Shift Right", "Arrow Up",
+    "Control Left", "Fn", "Meta Left", "Alt Left", "Space", "Alt Right", "Menu", "Control Right", "Arrow Left", "Arrow Down", "Arrow Right"
+  ],
+  "labels": {
+    "Escape": "Esc",
+    "Print Screen": "PrtSc",
+    "System Request": "Sys Rq",
+    "Scroll Lock": "ScrLk",
+    "Page Up": "PgUp",
+    "Page Down": "PgDn",
+    "Caps Lock": "CapsLk",
+    "Meta Left": "⊞",
+    "Menu": "≣",
+    "Arrow Up": "↑",
+    "Arrow Down": "↓",
+    "Arrow Left": "←",
+    "Arrow Right": "→",
+    "Shift Left": "Shift",
+    "Shift Right": "Shift",
+    "Control Left": "Ctrl",
+    "Control Right": "Ctrl",
+    "Alt Left": "Alt",
+    "Alt Right": "Alt"
+  },
+  "modifiers": {
+    "Fn": {
+      "F1": "Sleep",
+      "F2": "Display off",
+      "F3": "Change display",
+      "F5": "Airplane mode",
+      "F6": "Touchpad off",
+      "F9": "Settings",
+      "F10": "Search",
+      "F11": "Keyboard off",
+      "Print Screen": "System Request",
+      "Insert": "Scroll Lock",
+      "Home": "Pause",
+      "End": "Break",
+      "Space": {
+        "action": "change intensity",
+        "element": "keys highlight"
+      },
+      "Arrow Up": {
+        "action": "Increase",
+        "element": "Brightness"
+      },
+      "Arrow Down": {
+        "action": "Decrease",
+        "element": "Brightness"
+      },
+      "Arrow Left": {
+        "action": "Decrease",
+        "element": "Volume"
+      },
+      "Arrow Right": {
+        "action": "Increase",
+        "element": "Volume"
+      }
+    },
+    "Shift": [
+      "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+      "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "",
+      "", "Q", "D", "R", "W", "B", "J", "F", "U", "P", ":", "{", "}", "|",
+      "", "A", "S", "H", "T", "G", "Y", "N", "E", "O", "I", "\"", "",
+      "", "Z", "X", "M", "C", "V", "K", "L", "<", ">", "?"
+    ]
+  }
+}

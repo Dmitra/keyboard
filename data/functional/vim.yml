@@ -1,0 +1,9 @@
+---
+- key: 4
+  modifier: Shift
+  context: normal mode
+  action: move cursor
+  element: char
+  scope: line
+  direction: forward
+  amount: all

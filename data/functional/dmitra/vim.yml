@@ -1,0 +1,491 @@
+---
+- key: 1
+  context: normal mode
+  action: start
+  element: command
+- key: 2
+  context: normal mode
+  action: start
+  element: command
+- key: 3
+  context: normal mode
+  action: start
+  element: command
+- key: 4
+  context: normal mode
+  action: start
+  element: command
+- key: 5
+  context: normal mode
+  action: start
+  element: command
+- key: 6
+  context: normal mode
+  action: start
+  element: command
+- key: 7
+  context: normal mode
+  action: start
+  element: command
+- key: 8
+  context: normal mode
+  action: start
+  element: command
+- key: 9
+  context: normal mode
+  action: start
+  element: command
+- key: =
+  context: normal mode
+  action: auto indent
+  element: move command
+- key: q
+  context: normal mode
+  action: start recording
+- key: w
+  context: normal mode
+  action: navigate
+  scope: file
+  element: next word
+  direction: forward
+- key: e
+  context: normal mode
+  action: navigate
+  scope: file
+  element: word end
+  direction: forward
+- key: r
+  context: normal mode
+  action: replace
+  element: character
+- key: t
+  context: normal mode
+  action: tab
+  element: move command
+- key: y
+  context: normal mode
+  action: copy
+  element: move command
+- key: u
+  context: normal mode
+  action: undo
+  element: actions history
+  direction: previous
+- key: i
+  context: normal mode
+  action: insert mode
+  direction: backwards
+- key: o
+  context: normal mode
+  action: insert mode
+  element: line
+  direction: forward
+- key: p
+  context: normal mode
+  action: paste
+  direction: forward
+- key: '['
+  context: normal mode
+  action: command
+- key: ']'
+  context: normal mode
+  action: command
+- key: '\'
+  context: normal mode
+  action: command
+- key: a
+  context: normal mode
+  action: insert mode
+  element: char
+  direction: next
+- key: s
+  context: normal mode
+  action: save
+  element: file
+- key: d
+  context: normal mode
+  action: delete
+  element: move command
+- key: f
+  context: normal mode
+  action: find
+  scope: line
+  element: char
+  direction: forward
+- key: g
+  context: normal mode
+  action: move cursor
+  element: command
+- key: h
+  context: normal mode
+  action: move cursor
+  element: char
+  direction: left
+- key: j
+  context: normal mode
+  action: move cursor
+  element: char
+  direction: down
+- key: k
+  context: normal mode
+  action: move cursor
+  element: char
+  direction: up
+- key: l
+  context: normal mode
+  action: move cursor
+  element: char
+  direction: right
+- key: ;
+  context: normal mode
+  action: repeat find
+  scope: line
+  element: char
+  direction: forward
+  description: find previosly searched character with "f"
+- key: ','
+  context: normal mode
+  action: repeat find
+  scope: line
+  element: char
+  direction: backwards
+  description: find previosly searched character with "F"
+- key: .
+  context: normal mode
+  action: repeat
+  element: command
+- key: "'"
+  context: normal mode
+  action: move cursor
+  element: marked position
+- key: Enter
+  context: normal mode
+  action: insert
+  element: line
+  direction: below
+- key: z
+  context: normal mode
+  action: command
+  element: move command
+- key: x
+  context: normal mode
+  action: cut
+  element: char
+  direction: forward
+- key: c
+  context: normal mode
+  action: replace
+  element: move command
+- key: v
+  modifier: Shift
+  context: normal mode
+  action: visual mode
+  scope: line
+  element: move command
+- key: b
+  context: normal mode
+  action: move cursor
+  element: word
+  direction: backwards
+- key: n
+  context: normal mode
+  action: move cursor
+  element: searched pattern
+  direction: next
+- key: m
+  context: normal mode
+  action: mark
+  element: jump position
+- key: <
+  context: normal mode
+  action: motion command
+- key: >
+  context: normal mode
+  action: motion command
+- key: /
+  context: normal mode
+  action: search mode
+  element: file
+  direction: forward
+- key: h
+  modifier: t
+  context: normal mode
+  action: switch
+  element: tab
+  direction: previous
+- key: l
+  modifier: t
+  context: normal mode
+  action: switch
+  element: tab
+  direction: next
+- key: n
+  modifier: t
+  context: normal mode
+  action: switch
+  element: tab
+  direction: next
+- key: p
+  modifier: t
+  context: normal mode
+  action: switch
+  element: tab
+  direction: previous
+- key: c
+  modifier: t
+  context: normal mode
+  action: close
+  element: tab
+- key: d
+  modifier: t
+  context: normal mode
+  action: close
+  element: tab
+- key: h
+  modifier: y
+  context: normal mode
+  action: copy
+  element: char
+  direction: left
+- key: j
+  modifier: y
+  context: normal mode
+  action: copy
+  element: line
+  amount: current and next
+  direction: down
+- key: k
+  modifier: y
+  context: normal mode
+  action: copy
+  element: line
+  amount: current and next
+  direction: up
+- key: l
+  modifier: y
+  context: normal mode
+  action: copy
+  element: char
+  direction: right
+- key: h
+  modifier: d
+  context: normal mode
+  action: delete
+  element: char
+  direction: left
+- key: j
+  modifier: d
+  context: normal mode
+  action: delete
+  element: line
+  amount: current and next
+  direction: down
+- key: k
+  modifier: d
+  context: normal mode
+  action: delete
+  element: line
+  amount: current and next
+  direction: up
+- key: l
+  modifier: d
+  context: normal mode
+  action: delete
+  element: char
+  direction: right
+- key: h
+  modifier: c
+  context: normal mode
+  action: replace
+  element: char
+  direction: left
+- key: j
+  modifier: c
+  context: normal mode
+  action: replace
+  element: line
+  amount: current and next
+  direction: down
+- key: k
+  modifier: c
+  context: normal mode
+  action: replace
+  element: line
+  amount: current and next
+  direction: up
+- key: l
+  modifier: c
+  context: normal mode
+  action: replace
+  element: char
+  direction: right
+- key: '`'
+  modifier: Shift
+  context: normal mode
+  action: switch case
+  element: char
+  direction: forward
+  description: "'notildeop' option: Switch case of the character under the cursor and move the cursor to the right. If a [count] is given, do that many characters."
+- key: 2
+  modifier: Shift
+  context: normal mode
+  action: execute
+  element: content of register
+- key: 3
+  modifier: Shift
+  context: normal mode
+  action: find
+  scope: file
+  element: word near cursor
+  direction: previous
+- key: 5
+  modifier: Shift
+  context: normal mode
+  action: move cursor
+  element: matching item
+  description: "item is braces (), {}, [], html tags, etc"
+- key: 8
+  modifier: Shift
+  context: normal mode
+  action: find
+  scope: file
+  element: word near cursor
+  direction: next
+- key: q
+  modifier: Shift
+  context: normal mode
+  action: Ex mode
+- key: w
+  modifier: Shift
+  context: normal mode
+  action: move cursor
+  element: WORD
+  direction: forward
+- key: e
+  modifier: Shift
+  context: normal mode
+  action: move cursor
+  scope: WORD
+  element: char
+  direction: forward
+  amount: all
+- key: r
+  modifier: Shift
+  context: normal mode
+  action: redo
+  element: actions history
+  direction: forward
+- key: t
+  modifier: Shift
+  context: normal mode
+  action: tab
+  element: move command
+- key: o
+  modifier: Shift
+  context: normal mode
+  action: insert mode
+  element: line
+  direction: previous
+- key: p
+  modifier: Shift
+  context: normal mode
+  action: paste
+  direction: backwards
+- key: f
+  context: normal mode
+  action: find
+  scope: line
+  element: char
+  direction: backwards
+- key: g
+  modifier: Shift
+  context: normal mode
+  action: move cursor
+  element: line
+  direction: forward
+  amount: max
+- key: h
+  modifier: Shift
+  context: normal mode
+  action: move cursor
+  element: char
+  direction: left
+  amount: max
+- key: j
+  modifier: Shift
+  context: normal mode
+  action: scroll
+  scope: file
+  element: page
+  direction: down
+  amount: half
+- key: k
+  modifier: Shift
+  context: normal mode
+  action: scroll
+  scope: file
+  element: page
+  direction: up
+  amount: half
+- key: l
+  modifier: Shift
+  context: normal mode
+  action: move cursor
+  element: char
+  direction: right
+  amount: max
+- key: ';'
+  modifier: Shift
+  context: normal mode
+  action: command mode
+- key: "'"
+  modifier: Shift
+  context: normal mode
+  action: use
+  element: register
+- key: Enter
+  modifier: Shift
+  context: normal mode
+  action: insert
+  element: line
+  direction: above
+- key: x
+  modifier: Shift
+  context: normal mode
+  action: cut
+  element: char
+  direction: previous
+- key: v
+  context: normal mode
+  action: visual mode
+  scope: char
+  element: move command
+- key: n
+  modifier: Shift
+  context: normal mode
+  action: move cursor
+  element: searched pattern
+  direction: previous
+- key: m
+  modifier: Shift
+  context: normal mode
+  action: move cursor
+  element: page middle
+- key: ','
+  modifier: Shift
+  context: normal mode
+  action: change
+  element: indentation
+  direction: backwards
+- key: .
+  modifier: Shift
+  context: normal mode
+  action: change
+  element: indentation
+  direction: forward
+- key: /
+  modifier: Shift
+  context: normal mode
+  action: search mode
+  element: file
+  direction: backwards

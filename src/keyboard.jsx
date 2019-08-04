@@ -21,8 +21,7 @@ export default class Keyboard extends Component {
 
     this.state = {
       modifiers: [],
-      pressed: [],
-      sticky: [],
+      pressed: p.pressed || [],
     }
     this._onKeyDown = this._onKeyDown.bind(this)
     this._onKeyUp = this._onKeyUp.bind(this)
@@ -43,25 +42,26 @@ export default class Keyboard extends Component {
   }
 
   render (p) {
-    const { modifiers } = this.state
-    const { keyboard, app, context } = this.props
-    const totalWidth = _(keyboard.coordinates).map(c => c[0] + c[2]).max()
-    const coordinates = _.map(keyboard.coordinates, c => {
-      return [c[0] / totalWidth * 100, c[1] / totalWidth * 100, c[2] / totalWidth * 100, c[3] / totalWidth * 100]
+    const pressed = _(this.state.pressed).concat(this.props.fixed || []).uniq().value()
+    const { physical, visual, functional, context } = this.props.layout
+    const totalWidth = _(physical.layout).map(c => c[0] + c[2]).max()
+    const coordinates = _.map(physical.layout, c => {
+      return [c[0] / totalWidth * 100, c[1] / totalWidth * 100, c[2] / totalWidth * 100, c[3] / totalWidth * 100, c[4]]
     })
-    const modifiedKeys = getKeys(keyboard, modifiers, app, context)
+    const modifiers = _.filter(pressed, key => MODIFIERS.includes(key))
+    const modifiedKeys = getKeys(visual, modifiers, functional.layout, context)
 
-    const buttons = _.map(keyboard.keys, (key, i) => {
+    const buttons = _.map(coordinates, (c, i) => {
+      const key = visual.keys[i]
       let modifiedKey = modifiedKeys[key] ? modifiedKeys[key].key || modifiedKeys[key] : key
-      const label = keyboard.labels[key]
+      const label = visual.labels[key]
       let value = { key, label }
       if (_.isPlainObject(modifiedKeys[key])) _.merge(value, modifiedKeys[key])
-      const c = coordinates[i]
       return (
-        <Button id={key}
-          key={ key }
+        <Button id={ key }
+          key={ _.toString(key) + i }
           value={ value }
-          pressed={ this.state.pressed.includes(key) }
+          pressed={ pressed.includes(key) }
           coordinates={ c }
           onMouseOver={ this._onMouseOver }
           onMouseOut={ this._onMouseOut }
@@ -78,12 +78,7 @@ export default class Keyboard extends Component {
   }
 
   toggleKey (key, state) {
-    let { modifiers, pressed } = this.state
-    if (MODIFIERS.includes(key)) {
-      if (!modifiers.includes(key)) modifiers.push(key)
-      else modifiers = _.without(modifiers, key)
-      this.setState({ modifiers })
-    }
+    let { pressed } = this.state
     if (!pressed.includes(key)) pressed.push(key)
     else pressed = _.without(pressed, key)
     this.setState({ pressed })
@@ -107,20 +102,20 @@ export default class Keyboard extends Component {
 
   _onMouseOver (e) {
     const key = e.currentTarget.dataset.id
-    if (!this.state.sticky.includes(key)) this.toggleKey(key, true)
+    this.toggleKey(key, true)
   }
 
   _onMouseOut (e) {
     const key = e.currentTarget.dataset.id
-    if (!this.state.sticky.includes(key)) this.toggleKey(key, false)
+    this.toggleKey(key, false)
   }
 
   _onMouseDown (e) {
     const key = e.currentTarget.dataset.id
-    let sticky = this.state.sticky
-    if (sticky.includes(key)) sticky = _.without(sticky, key)
-    else sticky.push(key)
-    this.setState({ sticky })
+    let fixed = this.props.fixed
+    if (fixed.includes(key)) fixed = _.without(fixed, key)
+    else fixed.push(key)
+    this.props.onChange(fixed)
   }
 
   _onMouseUp (e) {

@@ -29,10 +29,11 @@ export default function Button (p) {
 
 const StyledButton = styled(Paper)`
   position: absolute;
-  left: ${p => p.c[0] + 'vw'};
-  top: ${p => p.c[1] + 'vw'};
-  width: ${p => p.c[2] + 'vw'};
-  height: ${p => p.c[3] + 'vw'};
+  left: ${p => p.c[0]}vw;
+  top: ${p => p.c[1]}vw;
+  width: ${p => p.c[2]}vw;
+  height: ${p => p.c[3]}vw;
+  transform: rotate(${p => p.c[4]}deg);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -42,6 +43,7 @@ const StyledButton = styled(Paper)`
   font-size: ${p => 0.5 + 960/window.innerWidth + 'vw'};
   font-weight: ${p => p.elevation === 1 ? 'bold' : 'normal'};
   color: grey;
+  transform-origin: ${p => p.c[4] > 0 ? 'left' : 'right'} top;
 `
 const ButtonHeader = styled.div`
   flex: 0 0 1.8vw;

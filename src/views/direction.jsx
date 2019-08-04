@@ -8,7 +8,9 @@ const directionAliases = {
   down: ['below'],
 }
 const amountAliases = {
-  '|': ['all', 'end']
+  '|': ['all', 'end', 'start', 'max', 'maximum', 'last', 'first'],
+  '½': ['half', '1/2'],
+  '¼': ['quater', '1/4'],
 }
 
 const invertedIndexD = {}
@@ -18,11 +20,11 @@ _.each(amountAliases, (aliases, name) => _.each(aliases, alias => invertedIndexA
 
 export default function Direction (p) {
   const value = directionAliases[p.value] ? p.value : invertedIndexD[p.value]
-  if (p.amount) debugger
   const amount = amountAliases[p.amount] ? p.amount : invertedIndexA[p.amount]
   return <StyledDirection>
+    { value === 'left' && <Amount>{ amount }</Amount>}
     <span className={'mdi mdi-chevron-' + value }></span>
-    <Amount>{ amount }</Amount>
+    { value === 'right' && <Amount>{ amount }</Amount>}
   </StyledDirection>
 
 }

@@ -22,14 +22,22 @@ const Layout = {
   physical: name => {
     return new Promise((resolve, reject) => {
       $.getJSON(`/data/physical/${name}.json`, data => {
+        resolve({ name, layout: data })
+      })
+    })
+  },
+  visual: name => {
+    return new Promise((resolve, reject) => {
+      $.getJSON(`/data/visual/${name}.json`, data => {
+        data.name = name
         normalizeModDefs(data.modifiers)
         resolve(data)
       })
     })
   },
-  app: name => {
+  functional: name => {
     return new Promise((resolve, reject) => {
-      $.get(`/data/app/${name}.yml`, data => {
+      $.get(`/data/functional/${name}.yml`, data => {
         const json = yaml.load(data)
         // Group actions by context and by modifier
         const actionsByContext = groupBy(json, 'context')
@@ -42,7 +50,7 @@ const Layout = {
         })
 
         _.each(actionsByContext, modDefs => normalizeModDefs(modDefs))
-        resolve(actionsByContext)
+        resolve({ name, layout: actionsByContext })
       })
     })
   }
@@ -92,15 +100,15 @@ export function findKeysByCode (text) {
 /**
  * @param keyboard layout
  * @param Array of modifier keys
- * @param Object app keyboard layout
- * @param String app context
+ * @param Object layout functional keyboard layout
+ * @param String context
  * @return Object of key values by physical key
  *   modifiers = ['Shift'}
  *   return {
  *     "a": "A"
  *   }
  */
-export function getKeys (keyboard, modifiers, app, context) {
+export function getKeys (keyboard, modifiers, layout, context) {
   let keysWithModifier = {}
   context = context || 'undefined'
   let modifier = _.sortBy(modifiers).join('+')
@@ -116,12 +124,12 @@ export function getKeys (keyboard, modifiers, app, context) {
   if (_.isEmpty(modifiers)) modifier = 'undefined'
 
   // Apply keys for any ("undefined") context
-  if (app && app['undefined']) {
-    _.merge(keysWithModifier, getKeysOfModifier(app['undefined'], modifier))
+  if (layout && layout['undefined']) {
+    _.merge(keysWithModifier, getKeysOfModifier(layout['undefined'], modifier))
   }
 
-  if (app && app[context] && context !== 'undefined') {
-    _.merge(keysWithModifier, getKeysOfModifier(app[context], modifier))
+  if (layout && layout[context] && context !== 'undefined') {
+    _.merge(keysWithModifier, getKeysOfModifier(layout[context], modifier))
   }
 
   return keysWithModifier

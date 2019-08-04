@@ -21,48 +21,57 @@ export default class App extends Component {
 
     this.state = {
       layouts: {},
-      keyboard: {},
-      app: {
-        name: 'ubuntu-dmitra',
-        layout: {}
-      },
-      context: '',
+      layout: {
+        physical: {},
+        visual: {},
+        functional: {},
+        context: '',
+      }
     }
   }
 
   componentDidMount () {
-    console.log(this._isMounted)
     this._initLayout()
     $(window).on('resize', () => this.setState({}))
   }
 
+  componentDidUpdate () {
+    this._setURL()
+  }
+
   componentWillUnmount () {
     $(window).off('resize')
-    console.log('UNMOUNT')
   }
 
   async _initLayout () {
-    const physical = await Layout.getList('physical')
-    const app = await Layout.getList('app')
-    const keyboard = await Layout.get('physical', physical[0])
-    this.setState({ layouts: { physical, app } })
-    this.setState({ keyboard })
-    // set default app layout
-    if (this.state.app.name) this._onLayoutChange({
-      target: {
-        name: 'app',
-        value: this.state.app.name,
-      } 
-    }, this.state.context)
-    
+    const params = new URLSearchParams(window.location.search)
+    const physicals = await Layout.getList('physical')
+    const visuals = await Layout.getList('visual')
+    const functionals = await Layout.getList('functional')
+    const physical = await Layout.get('physical', params.get('physical') || physicals[0])
+    const visual = await Layout.get('visual', params.get('visual') || visuals[0])
+    const functional = await Layout.get('functional', params.get('functional') || functionals[0])
+    const defaultContext = functional.layout['undefined'] ? 'undefined' : _.keys(functional.layout)[0]
+    const context = params.get('context') || defaultContext 
+    this.setState({
+      layouts: { physical: physicals, visual: visuals, functional: functionals },
+      layout: { physical, visual, functional, context },
+      keys: _(params.get('keys')).castArray().compact().value(),
+    })
   }
 
   render () {
-    const appOptions = _.map(this.state.layouts.app, (app, i) => {
-      return <MenuItem key={'app-option-'+i} value={app}>{_.capitalize(app)}</MenuItem>
+    const physicalOptions = _.map(this.state.layouts.physical, (layout, i) => {
+      return <MenuItem key={'layout-option-'+i} value={layout}>{_.capitalize(layout)}</MenuItem>
     })
-    appOptions.unshift(<MenuItem key="app-option-empty" value=""><em>None</em></MenuItem>)
-    const contextOptions = _.map(_.keys(this.state.app.layout), (context, i) => {
+    const visualOptions = _.map(this.state.layouts.visual, (layout, i) => {
+      return <MenuItem key={'layout-option-'+i} value={layout}>{_.capitalize(layout)}</MenuItem>
+    })
+    const functionalOptions = _.map(this.state.layouts.functional, (layout, i) => {
+      return <MenuItem key={'layout-option-'+i} value={layout}>{_.capitalize(layout)}</MenuItem>
+    })
+    functionalOptions.unshift(<MenuItem key="layout-option-empty" value=""><em>None</em></MenuItem>)
+    const contextOptions = _.map(_.keys(this.state.layout.functional.layout), (context, i) => {
       const label = context === 'undefined' ? 'any' : context
       return <MenuItem key={'context-option-'+i} value={context}>{label}</MenuItem>
     })
@@ -71,39 +80,65 @@ export default class App extends Component {
       <JssProvider jss={jss} generateClassName={generateClassName}>
       <>
       <FormControlStyled>
-        <InputLabel htmlFor="app-selector">Application</InputLabel>
+        <InputLabel htmlFor="physical-selector">Physical</InputLabel>
         <Select
           key="select"
-          value={this.state.app.name}
+          value={this.state.layout.physical.name || ""}
           onChange={this._onLayoutChange.bind(this)}
-            inputProps={{
-              name: 'app',
-              id: 'app-selector',
-            }}
-        >{ appOptions }
+          inputProps={{
+            id: 'physical-selector',
+            name: 'physical',
+          }}
+        >{ physicalOptions }
         </Select>
       </FormControlStyled>
-      { this.state.app.name &&
+      <FormControlStyled>
+        <InputLabel htmlFor="visual-selector">Visual</InputLabel>
+        <Select
+          key="select"
+          value={this.state.layout.visual.name || ""}
+          onChange={this._onLayoutChange.bind(this)}
+          inputProps={{
+            id: 'visual-selector',
+            name: 'visual',
+          }}
+        >{ visualOptions }
+        </Select>
+      </FormControlStyled>
+      <FormControlStyled>
+        <InputLabel htmlFor="functional-selector">Application</InputLabel>
+        <Select
+          key="select"
+          value={this.state.layout.functional.name || ""}
+          onChange={this._onLayoutChange.bind(this)}
+          inputProps={{
+            id: 'functional-selector',
+            name: 'functional',
+          }}
+        >{ functionalOptions }
+        </Select>
+      </FormControlStyled>
+      { this.state.layout.functional.name &&
         <FormControlStyled>
           <InputLabel htmlFor="context-selector">Context</InputLabel>
           <Select
             key="select"
-            value={this.state.context}
+            value={this.state.layout.context}
             onChange={this._onContextChange.bind(this)}
-              inputProps={{
-                name: 'context',
-                id: 'context-selector',
-              }}
+            inputProps={{
+              name: 'context',
+              id: 'context-selector',
+            }}
           >{ contextOptions }
           </Select>
         </FormControlStyled>
       }
 
       <Keyboard 
-        key="physical"
-        keyboard={this.state.keyboard}
-        app={this.state.app.layout}
-        context={this.state.context}
+        key="layout"
+        layout={this.state.layout}
+        fixed={this.state.keys}
+        onChange={this._onKeyPress.bind(this)}
       ></Keyboard>
       </>
       </JssProvider>
@@ -112,16 +147,33 @@ export default class App extends Component {
 
   // Event handlers
 
+  _setURL () {
+    const params = new URLSearchParams()
+    params.set('physical', this.state.layout.physical.name)
+    params.set('visual', this.state.layout.visual.name)
+    params.set('functional', this.state.layout.functional.name)
+    params.set('context', this.state.layout.context)
+    params.set('keys', this.state.keys)
+    history.replaceState(this.state, '', '?' + params.toString())
+  }
+
   async _onLayoutChange (e, context) {
     const type = e.target.name
     const name = e.target.value
     const layout = await Layout.get(type, name)
-    context = _.isString(context) && context ? context : _.findKey(layout)
-    this.setState({ [type]: { name, layout }, context })
+    this.state.layout[type] = layout
+    if (context) this.state.layout.context = _.isString(context) ? context : _.findKey(layout)
+    this.setState(this.state)
   }
 
   _onContextChange (e) {
-    this.setState({ context: e.target.value })
+    const state = this.state
+    state.layout.context = e.target.value
+    this.setState(state)
+  }
+
+  _onKeyPress (keys) {
+    this.setState({ keys })
   }
 }
 

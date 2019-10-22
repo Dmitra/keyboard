@@ -1,4 +1,5 @@
 # Near plan
+- fix: Ctrl+Shift cannot be saved in url
 - Editor
   - save as gist on github
 - keymouse layout

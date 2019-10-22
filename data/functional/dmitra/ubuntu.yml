@@ -124,59 +124,218 @@
   modifier: Ctrl
   action: open
   element: ubuntu launcher
+- key: r
+  modifier: Ctrl
+  action: refresh
+  element: text
 - key: a
   modifier: Ctrl
-  context: text field
   action: select
   element: text
   amount: all
 - key: z
   modifier: Ctrl
-  context: text field
   action: undo
 - key: x
   modifier: Ctrl
-  context: text field
   action: cut
   element: text
   amount: selected
 - key: c
   modifier: Ctrl
-  context: text field
   action: copy
   element: text
   amount: selected
 - key: v
   modifier: Ctrl
-  context: text field
   action: paste
   element: text
   amount: all
+- key: '`'
+  modifier: Alt
+  action: switch
+  element: tab
+  direction: previous
+- key: Tab
+  modifier: Alt
+  action: switch
+  element: tab
+  direction: next
+- key: q
+  modifier: Alt
+  action: close
+  element: tab
+- key: t
+  modifier: Alt
+  action: create
+  element: tab
 - key: a
   modifier: Alt
-  context: text field
   action: select
   element: text
   amount: all
 - key: z
   modifier: Alt
-  context: text field
   action: undo
 - key: x
   modifier: Alt
-  context: text field
   action: cut
   element: text
   amount: selected
 - key: c
   modifier: Alt
-  context: text field
   action: copy
   element: text
   amount: selected
 - key: v
   modifier: Alt
-  context: text field
   action: paste
   element: text
   amount: all
+- key: j
+  modifier: Alt
+  action: jump
+  element: history
+  direction: backward
+- key: f
+  modifier: Alt
+  action: switch
+  element: tab
+  direction: previous
+- key: u
+  modifier: Alt
+  action: move cursor
+  element: char
+  direction: up
+- key: p
+  modifier: Alt
+  action: switch
+  element: tab
+  direction: next
+- key: ;
+  modifier: Alt
+  action: jump
+  element: history
+  direction: forward
+- key: n
+  modifier: Alt
+  action: move cursor
+  element: char
+  direction: left
+- key: e
+  modifier: Alt
+  action: move cursor
+  element: char
+  direction: down
+- key: o
+  modifier: Alt
+  action: move cursor
+  element: char
+  direction: right
+- key: l
+  modifier: Alt
+  action: remove
+  element: char
+  direction: left
+- key: ','
+  modifier: Alt
+  action: zoom
+  element: all
+  direction: forward
+- key: .
+  modifier: Alt
+  action: remove
+  element: char
+  direction: right
+- key: /
+  modifier: Alt
+  action: search
+- key: /
+  modifier: Alt+Shift
+  action: delete
+  element: char
+  direction: right
+  amount: all
+- key: z
+  modifier: Ctrl+Shift
+  action: redo
+- key: q
+  modifier: Alt+Shift
+  action: open closed
+  element: tab
+- key: t
+  modifier: Alt+Shift
+  action: create with buffer
+  element: tab
+- key: z
+  modifier: Alt+Shift
+  action: redo
+- key: v
+  modifier: Alt+Shift
+  action: open
+  element: buffer history
+- key: f
+  modifier: Alt+Shift
+  action: move
+  element: tab
+  direction: backward
+- key: u
+  modifier: Alt+Shift
+  action: move cursor
+  element: char
+  direction: up
+  amount: 10
+- key: p
+  modifier: Alt+Shift
+  action: move
+  element: tab
+  direction: next
+- key: y
+  modifier: Alt+Shift
+  action: move cursor
+  element: char
+  direction: left
+  amount: all
+- key: n
+  modifier: Alt+Shift
+  action: move cursor
+  element: word
+  direction: left
+- key: e
+  modifier: Alt+Shift
+  action: move cursor
+  element: char
+  direction: down
+  amount: 10
+- key: o
+  modifier: Alt+Shift
+  action: move cursor
+  element: word
+  direction: right
+- key: i
+  modifier: Alt+Shift
+  action: move cursor
+  element: char
+  direction: right
+  amount: all
+- key: k
+  modifier: Alt+Shift
+  action: remove
+  element: char
+  direction: left
+  amount: all
+- key: l
+  modifier: Alt+Shift
+  action: remove
+  element: char
+  direction: left
+- key: ','
+  modifier: Alt+Shift
+  action: zoom
+  element: all
+  direction: backward
+- key: .
+  modifier: Alt+Shift
+  action: remove
+  element: char
+  direction: right

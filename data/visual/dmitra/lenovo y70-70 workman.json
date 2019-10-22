@@ -1,19 +1,19 @@
 {
   "keys": [
-    "Escape", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Print Screen", "Insert", "Delete",
+    "Caps Lock", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Print Screen", "Insert", "Delete",
     "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
     "Tab", "q", "d", "r", "w", "b", "j", "f", "u", "p", ";", "[", "]", "\\",
-    "Backspace", "a", "s", "h", "t", "g", "y", "n", "e", "o", "i", "'", "Enter",
+    "Escape", "a", "s", "h", "t", "g", "y", "n", "e", "o", "i", "'", "Enter",
     "Shift Left", "z", "x", "m", "c", "v", "k", "l", ",", ".", "/", "Shift Right", "Arrow Up",
     "Control Left", "Fn", "Meta Left", "Alt Left", "Space", "Alt Right", "Menu", "Control Right", "Arrow Left", "Arrow Down", "Arrow Right"
   ],
   "labels": {
-    "Escape": "Esc",
     "Print Screen": "PrtSc",
     "System Request": "Sys Rq",
     "Scroll Lock": "ScrLk",
     "Page Up": "PgUp",
     "Page Down": "PgDn",
+    "Caps Lock": "CapsLk",
     "Meta Left": "⊞",
     "Menu": "≣",
     "Arrow Up": "↑",

@@ -9,8 +9,8 @@ const directionAliases = {
 }
 const amountAliases = {
   '|': ['all', 'end', 'start', 'max', 'maximum', 'last', 'first'],
-  '½': ['half', '1/2'],
-  '¼': ['quater', '1/4'],
+  '½': ['half'],
+  '¼': ['quater'],
 }
 
 const invertedIndexD = {}
@@ -20,8 +20,11 @@ _.each(amountAliases, (aliases, name) => _.each(aliases, alias => invertedIndexA
 
 export default function Direction (p) {
   const value = directionAliases[p.value] ? p.value : invertedIndexD[p.value]
-  const amount = amountAliases[p.amount] ? p.amount : invertedIndexA[p.amount]
+  const fitValue = !value || _.isNumber(p.amount) || (p.amount && (p.amount.length < 5) && p.amount !== 'all')
+  const amount = amountAliases[p.amount] || fitValue ? p.amount : invertedIndexA[p.amount]
+  if (p.amount) console.log(p.amount.length)
   return <StyledDirection>
+    { fitValue && <AmountNumber>{ amount }</AmountNumber>}
     { value === 'left' && <Amount>{ amount }</Amount>}
     <span className={'mdi mdi-chevron-' + value }></span>
     { value === 'right' && <Amount>{ amount }</Amount>}
@@ -37,3 +40,6 @@ const StyledDirection = styled.div`
   align-items: center;
 `
 const Amount = styled.span``
+const AmountNumber = styled.span`
+  font-size: 10px;
+`

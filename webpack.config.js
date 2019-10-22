@@ -2,7 +2,10 @@ const path = require('path')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 
 module.exports = {
-  entry: './src/index.js',
+  mode: 'development',
+  entry: {
+    app: './src/index.js',
+  },
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
@@ -25,6 +28,15 @@ module.exports = {
           loader: "html-loader",
         }]
     }], 
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].js',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   devtool: 'source-map',
   plugins: [

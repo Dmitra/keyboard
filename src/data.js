@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import yaml from 'js-yaml'
 import ALIASES from '../data/aliases.yml'
 import BROWSER_CODES from '../data/codes.json'
@@ -11,7 +12,7 @@ _.each(ALIASES, (aliases, key) => {
 const Layout = {
   getList: type => {
     return new Promise((resolve, reject) => {
-      $.get(`/data/${type}/index.yml`, data => {
+      $.get(`data/${type}/index.yml`, data => {
         resolve(yaml.load(data))
       })
     })
@@ -21,14 +22,14 @@ const Layout = {
   },
   physical: name => {
     return new Promise((resolve, reject) => {
-      $.getJSON(`/data/physical/${name}.json`, data => {
+      $.getJSON(`data/physical/${name}.json`, data => {
         resolve({ name, layout: data })
       })
     })
   },
   visual: name => {
     return new Promise((resolve, reject) => {
-      $.getJSON(`/data/visual/${name}.json`, data => {
+      $.getJSON(`data/visual/${name}.json`, data => {
         data.name = name
         normalizeModDefs(data.modifiers)
         resolve(data)
@@ -37,7 +38,7 @@ const Layout = {
   },
   functional: name => {
     return new Promise((resolve, reject) => {
-      $.get(`/data/functional/${name}.yml`, data => {
+      $.get(`data/functional/${name}.yml`, data => {
         const json = yaml.load(data)
         // Group actions by context and by modifier
         const actionsByContext = groupBy(json, 'context')

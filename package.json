@@ -17,7 +17,8 @@
   },
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --inline --mode development"
+    "start": "webpack-dev-server --inline",
+    "deploy": "rsync -azP --delete dist/ data src/index.html daviste.com:/home/dmitra/daviste.com/static/demo/keyboard-layout"
   },
   "babel": {
     "plugins": [
@@ -49,7 +50,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^3.9.3",
-    "@mdi/font": "^3.6.95",
+    "@mdi/font": "^4.5.95",
     "jquery": "^3.4.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.11",
@@ -65,15 +66,15 @@
     "@graphiy/eslint-config": "^0.1.0",
     "babel-loader": "^8.0.5",
     "babel-polyfill": "^6.26.0",
-    "css-loader": "^2.1.1",
+    "css-loader": "^3.2.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "js-yaml-loader": "^1.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-jss": "^8.6.1",
-    "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2",
+    "style-loader": "^1.0.0",
+    "url-loader": "^2.2.0",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.3.1"

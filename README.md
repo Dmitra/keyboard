@@ -1,4 +1,8 @@
 # Interactive keyboard visualization
+## [Live demo](http://daviste.com/demo/keyboard-layout)
+
+[![](https://raw.githubusercontent.com/Dmitra/keyboard/master/snapshot/Alt-layout.jpg)](http://daviste.com/demo/keyboard-layout)
+
 ## Goal
 The original goal of this project was to spatially visualize and test ideas on different layouts before actually learning them to touch type as it is fairly hard to override muscle memory.
 Test subjects were:

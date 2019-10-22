@@ -1,1 +1,4 @@
 @import '~@mdi/font/css/materialdesignicons.css';
+body {
+  margin: 0;
+}

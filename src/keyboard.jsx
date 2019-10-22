@@ -13,6 +13,7 @@ import {
 
 const StyledKeyboard = styled.div`
   position: relative;
+  transform: scale(0.98);
 `
 
 export default class Keyboard extends Component {
